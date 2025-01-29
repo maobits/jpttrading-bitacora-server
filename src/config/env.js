@@ -9,3 +9,6 @@ export const config = {
     apiKeyWrite: process.env.API_KEY_WRITE || 'cd47f0e1-9a6b-4d52-a7d3-849a84e13a21',
     apiKeyRead: process.env.API_KEY_READ || '12345678-9abc-def0-1234-56789abcdef0',
 };
+curl -X GET "https://api.baserow.io/api/database/rows/table/413946/" \
+     -H "Authorization: Token cd47f0e1-9a6b-4d52-a7d3-849a84e13a21" \
+     -H "Content-Type: application/json"
