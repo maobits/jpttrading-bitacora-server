@@ -1,0 +1,91 @@
+{
+  "error": "Los datos devueltos no son válidos o están incompletos.",
+  "symbol": "AAPL",
+  "options": {
+    "period1": "2023-01-01",
+    "period2": "2023-12-31",
+    "interval": "1d"
+  },
+  "partialData": {
+    "meta": {
+      "currency": "USD",
+      "symbol": "AAPL",
+      "exchangeName": "NMS",
+      "fullExchangeName": "NasdaqGS",
+      "instrumentType": "EQUITY",
+      "firstTradeDate": "1980-12-12T14:30:00.000Z",
+      "regularMarketTime": "2024-12-26T21:00:01.000Z",
+      "hasPrePostMarketData": true,
+      "gmtoffset": -18000,
+      "timezone": "EST",
+      "exchangeTimezoneName": "America/New_York",
+      "regularMarketPrice": 259.02,
+      "fiftyTwoWeekHigh": 260.09,
+      "fiftyTwoWeekLow": 164.08,
+      "regularMarketDayHigh": 260.09,
+      "regularMarketDayLow": 257.63,
+      "regularMarketVolume": 27133647,
+      "longName": "Apple Inc.",
+      "shortName": "Apple Inc.",
+      "chartPreviousClose": 129.93,
+      "priceHint": 2,
+      "currentTradingPeriod": {
+        "pre": {
+          "timezone": "EST",
+          "end": "2024-12-27T14:30:00.000Z",
+          "start": "2024-12-27T09:00:00.000Z",
+          "gmtoffset": -18000
+        },
+        "regular": {
+          "timezone": "EST",
+          "end": "2024-12-27T21:00:00.000Z",
+          "start": "2024-12-27T14:30:00.000Z",
+          "gmtoffset": -18000
+        },
+        "post": {
+          "timezone": "EST",
+          "end": "2024-12-28T01:00:00.000Z",
+          "start": "2024-12-27T21:00:00.000Z",
+          "gmtoffset": -18000
+        }
+      },
+      "dataGranularity": "1d",
+      "range": "",
+      "validRanges": [
+        "1d",
+        "5d",
+        "1mo",
+        "3mo",
+        "6mo",
+        "1y",
+        "2y",
+        "5y",
+        "10y",
+        "ytd",
+        "max"
+      ]
+    },
+    "quotes": null,
+    "timestamp": null,
+    "events": {
+      "dividends": [
+        {
+          "amount": 0.23,
+          "date": 1676039400
+        },
+        {
+          "amount": 0.24,
+          "date": 1683898200
+        },
+        {
+          "amount": 0.24,
+          "date": 1691760600
+        },
+        {
+          "amount": 0.24,
+          "date": 1699626600
+        }
+      ]
+    }
+  }
+}
