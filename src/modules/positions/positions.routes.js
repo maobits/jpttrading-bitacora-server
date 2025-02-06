@@ -1,6 +1,7 @@
 import express from 'express';
 import {
-    getAllPositions,
+    getAllActivePositions,
+    getAllClosedPositions,
     getPositionById,
     createPosition,
     updatePosition,
@@ -11,12 +12,22 @@ const router = express.Router();
 
 router.get('/', async (req, res) => {
     try {
-        const positions = await getAllPositions();
+        const positions = await getAllActivePositions();
         res.status(200).json(positions);
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
 });
+
+router.get('/closed-positions', async (req, res) => {
+    try {
+        const positions = await getAllClosedPositions();
+        res.status(200).json(positions);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
 
 router.get('/:id', async (req, res) => {
     try {

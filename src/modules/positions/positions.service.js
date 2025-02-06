@@ -9,33 +9,80 @@ const apiClient = axios.create({
     },
 });
 
-// Obtener todas las filas
-export const getAllPositions = async () => {
-    const response = await apiClient.get('?user_field_names=true');
-    return response.data;
+// Obtener todas las posiciones activas
+export const getAllActivePositions = async () => {
+    console.log("📥 Solicitando todas las posiciones activas...");
+    try {
+        const response = await apiClient.get('?user_field_names=true&filters=%7B%22filter_type%22%3A%22AND%22%2C%22filters%22%3A%5B%7B%22type%22%3A%22boolean%22%2C%22field%22%3A%22State%22%2C%22value%22%3A%221%22%7D%5D%2C%22groups%22%3A%5B%5D%7D');
+        console.log("✅ Posiciones activas obtenidas:", response.data);
+        return response.data;
+    } catch (error) {
+        console.error("❌ Error al obtener posiciones activas:", error);
+        throw error;
+    }
 };
 
-// Obtener una fila por ID
+// Obtener todas las posiciones cerradas
+export const getAllClosedPositions = async () => {
+    console.log("📥 Solicitando todas las posiciones cerradas...");
+    try {
+        const response = await apiClient.get('?user_field_names=true&filters=%7B%22filter_type%22%3A%22AND%22%2C%22filters%22%3A%5B%7B%22type%22%3A%22boolean%22%2C%22field%22%3A%22State%22%2C%22value%22%3A%220%22%7D%5D%2C%22groups%22%3A%5B%5D%7D');
+        console.log("✅ Posiciones cerradas obtenidas:", response.data);
+        return response.data;
+    } catch (error) {
+        console.error("❌ Error al obtener posiciones cerradas:", error);
+        throw error;
+    }
+};
+
+// Obtener una posición por ID
 export const getPositionById = async (rowId) => {
-    const response = await apiClient.get(`${rowId}/?user_field_names=true`);
-    return response.data;
+    console.log(`📥 Obteniendo posición con ID: ${rowId}`);
+    try {
+        const response = await apiClient.get(`${rowId}/?user_field_names=true`);
+        console.log("✅ Datos de la posición obtenidos:", response.data);
+        return response.data;
+    } catch (error) {
+        console.error(`❌ Error al obtener la posición con ID ${rowId}:`, error);
+        throw error;
+    }
 };
 
-// Crear una fila
+// Crear una nueva posición
 export const createPosition = async (data) => {
-    const response = await apiClient.post('?user_field_names=true', data);
-    console.log(data);
-    return response.data;
+    console.log("📤 Enviando datos para crear una nueva posición:", data);
+    try {
+        const response = await apiClient.post('?user_field_names=true', data);
+        console.log("✅ Posición creada con éxito:", response.data);
+        return response.data;
+    } catch (error) {
+        console.error("❌ Error al crear la posición:", error);
+        throw error;
+    }
 };
 
-// Actualizar una fila
+// Actualizar una posición existente
 export const updatePosition = async (rowId, data) => {
-    const response = await apiClient.patch(`${rowId}/?user_field_names=true`, data);
-    return response.data;
+    console.log(`📤 Enviando datos para actualizar la posición con ID ${rowId}:`, data);
+    try {
+        const response = await apiClient.patch(`${rowId}/?user_field_names=true`, data);
+        console.log("✅ Posición actualizada con éxito:", response.data);
+        return response.data;
+    } catch (error) {
+        console.error(`❌ Error al actualizar la posición con ID ${rowId}:`, error);
+        throw error;
+    }
 };
 
-// Eliminar una fila
+// Eliminar una posición
 export const deletePosition = async (rowId) => {
-    await apiClient.delete(`${rowId}/`);
-    return { message: 'Posición eliminada con éxito' };
+    console.log(`🗑️ Eliminando la posición con ID ${rowId}...`);
+    try {
+        await apiClient.delete(`${rowId}/`);
+        console.log(`✅ Posición con ID ${rowId} eliminada con éxito.`);
+        return { message: 'Posición eliminada con éxito' };
+    } catch (error) {
+        console.error(`❌ Error al eliminar la posición con ID ${rowId}:`, error);
+        throw error;
+    }
 };
