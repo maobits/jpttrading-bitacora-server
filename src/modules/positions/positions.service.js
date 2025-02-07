@@ -40,7 +40,7 @@ export const getClosedPositionsWithFilter = async (months) => {
     console.log(`📥 Solicitando posiciones cerradas en los últimos ${months} meses...`);
     try {
         // 🔹 Construcción de la URL con el filtro codificado correctamente
-        const url = `?user_field_names=true&filters=%7B%22filter_type%22%3A%22AND%22%2C%22filters%22%3A%5B%7B%22type%22%3A%22boolean%22%2C%22field%22%3A%22State%22%2C%22value%22%3A%220%22%7D%5D%2C%22groups%22%3A%5B%5D%7D`;
+        const url = `?user_field_names=true&filters=%7B%22filter_type%22%3A%22AND%22%2C%22filters%22%3A%5B%7B%22type%22%3A%22date_is_within%22%2C%22field%22%3A%22TradeDate%22%2C%22value%22%3A%22America%2FBogota%3F12%3Fnr_months_from_now%22%7D%5D%2C%22groups%22%3A%5B%5D%7D`;
 
         // 🔹 Llamada a la API
         const response = await apiClient.get(url);
