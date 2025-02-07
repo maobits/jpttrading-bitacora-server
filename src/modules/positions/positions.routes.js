@@ -2,6 +2,7 @@ import express from 'express';
 import {
     getAllActivePositions,
     getAllClosedPositions,
+    getClosedPositionsWithFilter,
     getPositionById,
     createPosition,
     updatePosition,
@@ -27,6 +28,29 @@ router.get('/closed-positions', async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 });
+
+router.get('/closed-positions-with-filter', async (req, res) => {
+    try {
+        // 🔹 Obtener el número de meses desde los parámetros de consulta
+        const { months } = req.query;
+
+        // 🔹 Validar que se haya proporcionado un número de meses válido
+        if (!months || isNaN(months) || months <= 0) {
+            return res.status(400).json({ error: "El parámetro 'months' es requerido y debe ser un número positivo." });
+        }
+
+        console.log(`📥 Solicitando posiciones cerradas de los últimos ${months} meses...`);
+
+        // 🔹 Llamar a la función con el número de meses
+        const positions = await getClosedPositionsWithFilter(Number(months));
+
+        res.status(200).json(positions);
+    } catch (error) {
+        console.error("❌ Error en el endpoint '/closed-positions-with-filter':", error.message);
+        res.status(500).json({ error: "Error interno del servidor" });
+    }
+});
+
 
 
 router.get('/:id', async (req, res) => {
