@@ -11,7 +11,7 @@ const app = express();
 // Middleware
 app.use(bodyParser.json());
 
-// Configuración de CORS para permitir cualquier origen
+// Configuración de CORS para permitir solicitudes desde cualquier origen
 app.use(
     cors({
         origin: '*', // Permite solicitudes desde cualquier origen
@@ -46,6 +46,7 @@ app.use((err, req, res, next) => {
 
 // Iniciar servidor
 const PORT = config.port || 3000;
-app.listen(PORT, () => {
-    console.log(`🚀 Servidor ejecutándose en http://localhost:${PORT}`);
+const HOST = '0.0.0.0';  // Escuchar en todas las interfaces de red, incluyendo la IP pública
+app.listen(PORT, HOST, () => {
+    console.log(`🚀 Servidor ejecutándose en http://52.41.36.82:${PORT}`);
 });
