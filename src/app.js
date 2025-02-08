@@ -48,5 +48,5 @@ app.use((err, req, res, next) => {
 const PORT = config.port || 3000;
 const HOST = '0.0.0.0';  // Escuchar en todas las interfaces de red, incluyendo la IP pública
 app.listen(PORT, HOST, () => {
-    console.log(`🚀 Servidor ejecutándose en http://52.41.36.82:${PORT}`);
+    console.log(`🚀 Servidor ejecutándose en http://localhost:${PORT}`);
 });
