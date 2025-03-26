@@ -9,7 +9,7 @@ import yfinanceRoutes from "./modules/yfinance/yfinance.routes.js"; // Ruta para
 import { validateApiKey } from "./middleware/auth.js";
 
 const app = express();
-const isProduction = true; // Cambiar a true para producción
+const isProduction = false; // Cambiar a true para producción
 
 // Middleware
 app.use(bodyParser.json());
