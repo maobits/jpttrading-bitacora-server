@@ -40,11 +40,10 @@ export const getAllClosedPositions = async () => {
 };
 
 // Obtener todas las posiciones cerradas con filtro de antigüedad en meses
-// Obtener todas las posiciones cerradas con filtro de antigüedad en meses
 export const getClosedPositionsWithFilter = async (months) => {
   console.log(
     `📥 Solicitando posiciones cerradas (filtro: ${
-      months === 0 ? "YTD Q1" : `últimos ${months} meses`
+      months === 13 ? "YTD Q1 (Ene-Mar)" : `últimos ${months} meses`
     })...`
   );
 
@@ -58,15 +57,15 @@ export const getClosedPositionsWithFilter = async (months) => {
     const year = today.getFullYear();
     const monthSet = new Set();
 
-    if (months === 0) {
-      // 🔹 Si months es 0 => YTD Q1: enero, febrero, marzo del año actual
+    if (months === 13) {
+      // ✅ YTD (Ene-Mar)
       ["01", "02", "03"].forEach((m) => {
         monthSet.add(`${year}-${m}`);
       });
     } else {
-      // 🔹 Caso general: últimos `months` meses desde hoy
+      // 🔁 Últimos N meses desde hoy
       for (let i = 0; i < months; i++) {
-        const date = new Date(year, today.getMonth() - i, 1);
+        const date = new Date(today.getFullYear(), today.getMonth() - i, 1);
         const key = `${date.getFullYear()}-${(date.getMonth() + 1)
           .toString()
           .padStart(2, "0")}`;
