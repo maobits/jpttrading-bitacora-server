@@ -40,56 +40,19 @@ export const getAllClosedPositions = async () => {
 };
 
 // Obtener todas las posiciones cerradas con filtro de antigüedad en meses
-// Obtener todas las posiciones cerradas con filtro de antigüedad en meses
 export const getClosedPositionsWithFilter = async (months) => {
   console.log(
-    `📥 Solicitando posiciones cerradas (filtro: ${
-      months === 0 ? "YTD Q1" : `últimos ${months} meses`
-    })...`
+    `📥 Solicitando posiciones cerradas en los últimos ${months} meses...`
   );
-
   try {
+    // 🔹 Construcción de la URL con el filtro codificado correctamente
     const url = `?user_field_names=true&filters=%7B%22filter_type%22%3A%22AND%22%2C%22filters%22%3A%5B%7B%22type%22%3A%22boolean%22%2C%22field%22%3A%22State%22%2C%22value%22%3A%220%22%7D%5D%2C%22groups%22%3A%5B%5D%7D`;
 
+    // 🔹 Llamada a la API
     const response = await apiClient.get(url);
-    const allPositions = response.data?.results || [];
 
-    const today = new Date();
-    const year = today.getFullYear();
-    const monthSet = new Set();
-
-    if (months === 0) {
-      // 🔹 Si months es 0 => YTD Q1: enero, febrero, marzo del año actual
-      ["01", "02", "03"].forEach((m) => {
-        monthSet.add(`${year}-${m}`);
-      });
-    } else {
-      // 🔹 Caso general: últimos `months` meses desde hoy
-      for (let i = 0; i < months; i++) {
-        const date = new Date(year, today.getMonth() - i, 1);
-        const key = `${date.getFullYear()}-${(date.getMonth() + 1)
-          .toString()
-          .padStart(2, "0")}`;
-        monthSet.add(key);
-      }
-    }
-
-    const filtered = allPositions.filter((position) => {
-      const closingDate = position.ClosingDate;
-      if (!closingDate) return false;
-
-      const dateObj = new Date(closingDate);
-      const key = `${dateObj.getFullYear()}-${(dateObj.getMonth() + 1)
-        .toString()
-        .padStart(2, "0")}`;
-      return monthSet.has(key);
-    });
-
-    console.log(
-      `✅ Posiciones filtradas (${filtered.length}) [DEBUG]:`,
-      filtered
-    );
-    return { count: filtered.length, results: filtered };
+    console.log("✅ Posiciones cerradas obtenidas [DEBUG]:", response.data);
+    return response.data;
   } catch (error) {
     console.error(
       "❌ Error al obtener posiciones cerradas con filtro:",
