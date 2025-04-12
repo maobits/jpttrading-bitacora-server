@@ -58,10 +58,11 @@ export const getClosedPositionsWithFilter = async (months) => {
     const monthSet = new Set();
 
     if (months === 13) {
-      // ✅ YTD (Ene-Mar)
-      ["01", "02", "03"].forEach((m) => {
-        monthSet.add(`${year}-${m}`);
-      });
+      // ✅ YTD: desde enero hasta el mes actual
+      for (let m = 0; m <= today.getMonth(); m++) {
+        const key = `${year}-${(m + 1).toString().padStart(2, "0")}`;
+        monthSet.add(key);
+      }
     } else {
       // 🔁 Últimos N meses desde hoy
       for (let i = 0; i < months; i++) {
